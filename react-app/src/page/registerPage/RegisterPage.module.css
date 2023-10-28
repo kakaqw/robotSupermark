@@ -1,0 +1,42 @@
+.cantainer {
+  /* padding-top: 250px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.Box {
+  top: 100px;
+  margin: 0 auto;
+  height: 400px;
+  width: 550px;
+  background-color: white;
+  border-radius: 30px;
+  border-radius: 30px;
+}
+
+.title {
+  margin-top: 50px;
+  font-size: 50px;
+}
+
+.inputSize1 {
+  margin-top: 20px;
+  height: 50px;
+  width: 350px;
+  border-radius: 10px;
+}
+.inputSize2 {
+  margin-top: 5px;
+  height: 50px;
+  width: 350px;
+  border-radius: 10px;
+}
+
+.button1 {
+  margin-top: 10px;
+  height: 40px;
+  width: 80px;
+}
