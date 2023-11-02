@@ -8,6 +8,7 @@ router.post("/login", async (ctx, next) => {
   const { username, password } = ctx.request.body;
 
   const data = await login(username, password);
+  console.log(data);
 
   ctx.body = {};
 
@@ -16,7 +17,7 @@ router.post("/login", async (ctx, next) => {
   } else {
     ctx.body.login = true;
     ctx.session.username = data.username;
-    console.log(ctx.session);
+    // console.log(ctx.session);
     return;
   }
 });

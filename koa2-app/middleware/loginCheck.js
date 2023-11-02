@@ -3,7 +3,7 @@ const loginCheck = async (ctx, next) => {
     await next();
     return;
   }
-  console.log(ctx.session);
+  console.log(ctx.session.username);
   ctx.body = {
     login: false,
   };

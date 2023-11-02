@@ -36,14 +36,18 @@ const Robot: React.FC<humanProps & { addToCart: (goods: Goods) => void }> = ({
     addToCart(goods);
 
     try {
-      const message = await axios.post(
+      const data: any = await axios.post(
         "http://localhost:8000/goods/addToCart",
-        goods
+        goods,
+        {
+          withCredentials: true,
+        }
       );
-      if (message) {
-        window.alert("success");
+      console.log(data.data.message);
+      if (data.data.message) {
+        console.log("addCart success");
       } else {
-        window.alert("fail");
+        console.log("addCart fail");
       }
     } catch (error) {
       console.log(error);
@@ -59,13 +63,13 @@ const Robot: React.FC<humanProps & { addToCart: (goods: Goods) => void }> = ({
     };
 
     try {
-      const message: any = await axios.post(
+      const data: any = await axios.post(
         "http://localhost:8000/goods/buyGoods",
         goods,
         { withCredentials: true }
       );
-      console.log(message.data);
-      if (message) {
+      console.log(data.data.message);
+      if (data.data.message) {
         window.alert("success");
       } else {
         window.alert("fail");

@@ -14,10 +14,12 @@ const RegisterPage: React.FC = () => {
         username,
         password,
       });
-      console.log(message, message.data.register);
+
       if (message.data.register) {
+        window.location.href = "/login";
         alert("注册成功");
       } else {
+        window.location.href = "/login";
         alert("已经注册过了");
       }
     } catch (error) {

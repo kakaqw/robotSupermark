@@ -6,6 +6,7 @@ const login = async (username, password) => {
     console.log("fail data is null");
     return null;
   }
+  console.log("find success", data);
   return data.dataValues;
 };
 

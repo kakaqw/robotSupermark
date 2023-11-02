@@ -20,6 +20,7 @@ const LoginPage: React.FC = () => {
       );
       console.log(message);
       if (message.data.login) {
+        window.location.href = "/";
         window.alert("success");
       } else {
         window.alert("error");
@@ -47,7 +48,7 @@ const LoginPage: React.FC = () => {
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         <br></br>
-        <a href="#">注册</a>
+        <a href="/register">注册</a>
         <br></br>
         <button className={styles.button1} onClick={login}>
           登入

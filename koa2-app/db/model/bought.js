@@ -5,7 +5,7 @@ const bought = seq.define("bought", {
   goodsId: {
     type: sequelize.INTEGER,
     allowNull: false,
-    primaryKey: true,
+    // primaryKey: true,
   },
   goodsName: {
     type: sequelize.STRING,
@@ -15,10 +15,10 @@ const bought = seq.define("bought", {
     type: sequelize.INTEGER,
     allowNull: false,
   },
-  img: {
-    type: sequelize.STRING,
-    allowNull: false,
-  },
+  // img: {
+  //   type: sequelize.STRING,
+  //   allowNull: false,
+  // },
   username: {
     type: sequelize.STRING,
     allowNull: false,

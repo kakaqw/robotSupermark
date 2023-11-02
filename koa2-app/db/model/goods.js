@@ -5,7 +5,7 @@ const goods = seq.define("good", {
   goodsId: {
     type: sequelize.INTEGER,
     allowNull: false,
-    primaryKey: true,
+    // primaryKey: true,
   },
   goodsName: {
     type: sequelize.STRING,
@@ -15,7 +15,11 @@ const goods = seq.define("good", {
     type: sequelize.INTEGER,
     allowNull: false,
   },
-  img: {
+  // img: {
+  //   type: sequelize.STRING,
+  //   allowNull: false,
+  // },
+  username: {
     type: sequelize.STRING,
     allowNull: false,
   },

@@ -10,37 +10,49 @@ const loginCheck = require("../middleware/loginCheck");
 router.prefix("/goods");
 
 router.post("/buyGoods", loginCheck, async (ctx, next) => {
-  console.log("session", ctx.session);
-  console.log("session", ctx.session.username);
-  ctx.body = {
-    login: true,
-  };
+  const data = ctx.request.body;
+  const dataBuy = await buyGoods(data, ctx.session.username);
+  console.log(dataBuy.buy);
+
+  if (dataBuy.buy) {
+    ctx.body = {
+      message: true,
+    };
+  } else {
+    ctx.body = {
+      message: false,
+    };
+  }
 });
 
-router.post("/addToCart", async (ctx, next) => {
-  /////////////////////////////////////////
-  /*   后续这里要获得username，用来对应记录   */
-  /////////////////////////////////////////
+router.post("/addToCart", loginCheck, async (ctx, next) => {
+  const data = ctx.request.body;
+  const dataCart = await addToCart(data, ctx.session.username);
+  console.log("session.username is", ctx.session.username);
+  console.log(dataCart);
+  if (dataCart.addToCart) {
+    ctx.body = {
+      message: true,
+    };
+  } else {
+    ctx.body = {
+      message: false,
+    };
+  }
+});
 
-  const { id, name, price } = ctx.request.body;
-  const data = await addToCart(id, name, price);
+router.post("/delCartGoods", loginCheck, async (ctx, next) => {
+  const { name } = ctx.request.body;
+  const data = await delGoods(name, ctx.session.username);
   ctx.body = {
     message: data,
   };
 });
 
-router.post("/delGoods", async (ctx, next) => {
-  const { id, name } = ctx.request.body;
-  const data = await delGoods(id, name);
-  ctx.body = {
-    message: data,
-  };
-});
-
-router.post("/buyAllCartGoods", async (ctx, next) => {
-  const username = ctx.request.body;
-  console.log(username);
-  const data = await buyAllCartGoods(username);
+router.post("/buyAllCartGoods", loginCheck, async (ctx, next) => {
+  const goodsItems = ctx.request.body;
+  const data = await buyAllCartGoods(goodsItems, ctx.session.username);
+  // console.log("data is", data);
 
   ctx.body = {
     message: data,

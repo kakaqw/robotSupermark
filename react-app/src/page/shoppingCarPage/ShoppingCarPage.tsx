@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import styles from "./ShoppingCarPage.module.css";
 import User from "../../components/user/user";
 import { CartItem } from "../../interfaceList";
@@ -18,11 +18,19 @@ const ShoppingCarPage: React.FC<props> = ({ items, buyCart, deleteGoods }) => {
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     const id = event.currentTarget.getAttribute("data-id");
-    const name = event.currentTarget.getAttribute("data-name");
-    deleteGoods(id, name);
+    const goodsName = event.currentTarget.getAttribute("data-name");
+    deleteGoods(id, goodsName);
+
     //到时候直接将删除数据给数据库，然后用数据库返回的值使用 副作用 钩子刷新购物车
     try {
-      axios.post("http://localhost:8000/goods/delGoods", { id, name });
+      const data = await axios.post(
+        "http://localhost:8000/goods/delCartGoods",
+        {
+          name: goodsName,
+        },
+        { withCredentials: true }
+      );
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -30,16 +38,14 @@ const ShoppingCarPage: React.FC<props> = ({ items, buyCart, deleteGoods }) => {
 
   const buyAllCartGoods = async () => {
     try {
-      //后续通过session获取username，然后去清空数据库中对应user的cartItem数据
-      //然后通过数据库中返回的值去用副作用钩子刷新页面
-      const session = { username: "zhangsan" };
-
+      // console.log(items);
       const data = await axios.post(
         "http://localhost:8000/goods/buyAllCartGoods",
-        session
+        items,
+        { withCredentials: true }
       );
-      buyCart();
       console.log(data);
+      buyCart();
     } catch (error) {
       console.log(error);
     }

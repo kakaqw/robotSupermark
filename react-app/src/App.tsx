@@ -45,10 +45,21 @@ function App() {
   };
 
   const deleteGoods = (id: any, name: any) => {
-    const item = cartItems.filter((a) => {
-      return a.goods.id !== id && a.goods.name !== name;
-    });
-    setCartItems(item);
+    const goods = cartItems.find((i) => i.goods.name == name);
+    const num = goods?.quantity as number;
+
+    if (num > 1) {
+      const item = cartItems.forEach((i) => {
+        if (i.goods.name == name) {
+          i.quantity--;
+        }
+      });
+    } else {
+      const item = cartItems.filter((a) => {
+        return a.goods.id !== id && a.goods.name !== name;
+      });
+      setCartItems(item);
+    }
   };
 
   return (
